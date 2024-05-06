@@ -2,6 +2,8 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import sortTypes from '../../constants/SortTypes';
 
+import './SortDropdown.css';
+
 interface SortDropdownProps {
   sort: string | null;
   setSort: (sort: string | null) => void;
@@ -9,8 +11,8 @@ interface SortDropdownProps {
 
 const SortDropdown: React.FC<SortDropdownProps> = ({ sort, setSort }) => {
   return (
-    <>
-      <p style={{ margin: 0 }}>Sort by: </p>
+    <div className='sortDropdownContainer'>
+      <p className='sortText'>Sort by: </p>
       <Dropdown
         data-bs-theme='dark'
         onSelect={(eventKey: string | null, event: Object) => {
@@ -20,12 +22,8 @@ const SortDropdown: React.FC<SortDropdownProps> = ({ sort, setSort }) => {
         <Dropdown.Toggle
           id='dropdown-button-dark-sort-menu'
           variant='secondary'
-          style={{
-            backgroundColor: 'transparent',
-            color: 'black',
-            border: 'none',
-            width: '6em', // This is to make it so the 'sort by' text doesn't move when the sort changes
-          }}
+          className='dropdownToggle'
+          style={{ backgroundColor: 'transparent', color: 'black' }}
         >
           {sort}
         </Dropdown.Toggle>
@@ -45,7 +43,7 @@ const SortDropdown: React.FC<SortDropdownProps> = ({ sort, setSort }) => {
           ))}
         </Dropdown.Menu>
       </Dropdown>
-    </>
+    </div>
   );
 };
 
