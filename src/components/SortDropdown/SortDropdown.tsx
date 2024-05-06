@@ -34,7 +34,6 @@ const SortDropdown: React.FC<SortDropdownProps> = ({ sort, setSort }) => {
           {Object.values(sortTypes).map((sortType) => (
             <Dropdown.Item
               key={sortType}
-              href={`#/action-${sortType}`}
               active={sort === sortType}
               eventKey={sortType}
             >
