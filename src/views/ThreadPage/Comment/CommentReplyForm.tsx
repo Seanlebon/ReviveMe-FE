@@ -27,6 +27,7 @@ const CommentReplyForm: React.FC<CommentReplyFormProps> = ({
   };
 
   const handleReplySubmit = () => {
+    console.log('Replying to comment', parentComment.id);
     axios
       .post(`/api/v1/threads/${id}/comments`, {
         author_id: 1, // TODO: change hardcoded value once we get user API running

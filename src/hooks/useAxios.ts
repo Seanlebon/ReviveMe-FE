@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
 interface Config {
   axiosInstance: any; // Replace 'any' with the actual type of your Axios instance
   method: string;
@@ -8,13 +8,22 @@ interface Config {
 }
 
 const useAxios = (config: Config) => {
-  const { axiosInstance, method, url, requestConfig = {} } = config;
+  const { axiosInstance, method, url } = config;
   const [response, setResponse] = useState<any[] | any>([]); // Replace 'any[]' with the actual type of your response data
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [reload, setReload] = useState<number>(0);
 
-  const refetch = () => setReload((prev) => prev + 1);
+  const [requestConfig, setRequestConfig] = useState<AxiosRequestConfig>(
+    config.requestConfig || ({} as AxiosRequestConfig),
+  );
+
+  const refetch = (newReqConfigParams: Object = {}) => {
+    setRequestConfig({ ...requestConfig, ...newReqConfigParams });
+    setLoading(true);
+
+    setReload((prev) => prev + 1);
+  };
 
   useEffect(() => {
     const controller = new AbortController();

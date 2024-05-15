@@ -5,11 +5,10 @@ import axios from '../../apis/reviveme';
 import { Thread } from '../../types/CommonTypes';
 import ThreadCard from '../../components/ThreadCard/ThreadCard';
 import useAxios from '../../hooks/useAxios';
-import { Dropdown } from 'react-bootstrap';
 import SortDropdown from '../../components/SortDropdown/SortDropdown';
 
 const Home: React.FC = () => {
-  const [threads, error, loading] = useAxios({
+  const [threads, error, loading, refetch] = useAxios({
     axiosInstance: axios,
     method: 'GET',
     url: '/api/v1/threads',
@@ -39,7 +38,13 @@ const Home: React.FC = () => {
               cursor: 'default',
             }}
           >
-            <SortDropdown sort={sort} setSort={setSort} />
+            <SortDropdown
+              sort={sort}
+              onSortChange={(newSort) => {
+                setSort(newSort);
+                refetch({ params: { sortby: newSort } });
+              }}
+            />
           </div>
           {threads.map((thread: Thread) => (
             <div key={thread.id}>

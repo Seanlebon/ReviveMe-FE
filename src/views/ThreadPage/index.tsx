@@ -96,7 +96,13 @@ const ThreadPage: React.FC = () => {
           <CreateCommentForm refetchComments={refetchComments} />
 
           <div className='sort-dropdown-container comment-card'>
-            <SortDropdown sort={sort} setSort={setSort} />
+            <SortDropdown
+              sort={sort}
+              onSortChange={(newSort) => {
+                setSort(newSort);
+                refetchComments({ params: { sortby: newSort } });
+              }}
+            />
           </div>
 
           {commentLoading && <p>Loading Comments...</p>}

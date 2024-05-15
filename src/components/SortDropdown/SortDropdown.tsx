@@ -6,17 +6,20 @@ import './SortDropdown.css';
 
 interface SortDropdownProps {
   sort: string | null;
-  setSort: (sort: string | null) => void;
+  onSortChange: (sort: string | null) => void;
 }
 
-const SortDropdown: React.FC<SortDropdownProps> = ({ sort, setSort }) => {
+const SortDropdown: React.FC<SortDropdownProps> = ({
+  sort,
+  onSortChange = (_) => {},
+}) => {
   return (
     <div className='sortDropdownContainer'>
       <p className='sortText'>Sort by: </p>
       <Dropdown
         data-bs-theme='dark'
         onSelect={(eventKey: string | null, event: Object) => {
-          setSort(eventKey);
+          onSortChange(eventKey);
         }}
       >
         <Dropdown.Toggle
