@@ -10,6 +10,7 @@ import useAxios from '../../hooks/useAxios';
 import axios from '../../apis/reviveme';
 import VoteView from '../../components/VoteView/VoteView';
 import SortDropdown from '../../components/SortDropdown/SortDropdown';
+import sortTypes from '../../constants/SortTypes';
 
 const ThreadPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,7 @@ const ThreadPage: React.FC = () => {
   const [tempContent, setTempContent] = useState<string>('');
   const [thread, error, loading, axiosFetch] = useAxiosFunction();
 
-  const [sort, setSort] = useState<string | null>('newest');
+  const [sort, setSort] = useState<string | null>(sortTypes.newest);
 
   const [comments, commentError, commentLoading, refetchComments] = useAxios({
     axiosInstance: axios,

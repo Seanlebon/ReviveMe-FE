@@ -6,6 +6,7 @@ import { Thread } from '../../types/CommonTypes';
 import ThreadCard from '../../components/ThreadCard/ThreadCard';
 import useAxios from '../../hooks/useAxios';
 import SortDropdown from '../../components/SortDropdown/SortDropdown';
+import sortTypes from '../../constants/SortTypes';
 
 const Home: React.FC = () => {
   const [threads, error, loading, refetch] = useAxios({
@@ -14,7 +15,7 @@ const Home: React.FC = () => {
     url: '/api/v1/threads',
   });
 
-  const [sort, setSort] = React.useState<string | null>('newest');
+  const [sort, setSort] = React.useState<string | null>(sortTypes.newest);
 
   return (
     <div>
