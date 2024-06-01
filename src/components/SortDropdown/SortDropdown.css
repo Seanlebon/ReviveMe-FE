@@ -1,0 +1,14 @@
+.sortDropdownContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sortText {
+  margin: 0;
+}
+
+.dropdownToggle {
+  border: none;
+  width: 6em; /* This is so the 'sort by' text doesn't move when the sort type changes */
+}

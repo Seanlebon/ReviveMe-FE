@@ -9,12 +9,16 @@ import CreateCommentForm from './Comment/CreateCommentForm';
 import useAxios from '../../hooks/useAxios';
 import axios from '../../apis/reviveme';
 import VoteView from '../../components/VoteView/VoteView';
+import SortDropdown from '../../components/SortDropdown/SortDropdown';
+import sortTypes from '../../constants/SortTypes';
 
 const ThreadPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [isEditing, setIsEditing] = useState(false);
   const [tempContent, setTempContent] = useState<string>('');
   const [thread, error, loading, axiosFetch] = useAxiosFunction();
+
+  const [sort, setSort] = useState<string | null>(sortTypes.newest);
 
   const [comments, commentError, commentLoading, refetchComments] = useAxios({
     axiosInstance: axios,
@@ -91,6 +95,17 @@ const ThreadPage: React.FC = () => {
           <hr style={{ paddingBottom: '2%' }} />
           <p style={{ textAlign: 'left' }}>Comments:</p>
           <CreateCommentForm refetchComments={refetchComments} />
+
+          <div className='sort-dropdown-container comment-card'>
+            <SortDropdown
+              sort={sort}
+              onSortChange={(newSort) => {
+                setSort(newSort);
+                refetchComments({ params: { sortby: newSort } });
+              }}
+            />
+          </div>
+
           {commentLoading && <p>Loading Comments...</p>}
           {!commentLoading && commentError && (
             <p>There was an error loading comments: {commentError}</p>

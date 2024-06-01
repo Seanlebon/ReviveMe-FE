@@ -9,6 +9,15 @@
   text-align: left;
 }
 
+.sort-dropdown-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  border: none;
+  box-shadow: none;
+  margin-top: 1em;
+}
+
 .author-username {
   font-size: 0.8rem;
   color: #888;
